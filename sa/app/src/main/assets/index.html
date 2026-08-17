@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>salp Linux Mobile PC</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2e;--panel2:#13243b;--line:#28405f;--text:#eff7ff;--muted:#9fb0c6;--accent:#62d0ff;--task:#08111d}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif}
+body{background:radial-gradient(circle at 20% 10%,#16375a 0,transparent 34%),linear-gradient(135deg,#07111f,#0a1830 55%,#10223d)}
+#desktop{position:relative;height:100%;padding:20px 16px 66px;overflow:auto}
+.brand{position:absolute;right:18px;top:16px;text-align:right;color:#d8f5ff;opacity:.9}.brand b{font-size:22px}.brand small{display:block;color:var(--muted)}
+.icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:14px;width:min(520px,80vw)}
+.icon{border:0;background:transparent;color:#fff;padding:8px;border-radius:14px;font-size:13px}.icon:hover,.icon:focus{background:#ffffff14}.glyph{width:62px;height:62px;border-radius:16px;background:linear-gradient(145deg,#1d4d77,#173655);display:grid;place-items:center;margin:auto auto 6px;font-size:31px;border:1px solid #ffffff1f;box-shadow:0 10px 20px #0005}
+#taskbar{position:fixed;left:0;right:0;bottom:0;height:54px;background:#07101bea;border-top:1px solid #34506d;display:flex;align-items:center;gap:8px;padding:6px 10px;backdrop-filter:blur(12px);z-index:1000}
+#startBtn{height:40px;border:1px solid #4b6d8c;background:#122941;color:#fff;border-radius:12px;padding:0 15px;font-weight:700}.task{height:40px;min-width:42px;border:1px solid #36516e;background:#0e2035;color:#fff;border-radius:11px}.clock{margin-left:auto;text-align:right;font-size:12px;color:#c7d9ea;line-height:1.25}
+#startMenu{position:fixed;left:10px;bottom:62px;width:min(330px,calc(100vw - 20px));background:#0c1b2ceF;border:1px solid #45627f;border-radius:17px;padding:14px;box-shadow:0 20px 60px #000a;display:none;z-index:1100}.startHead{font-size:18px;font-weight:800;margin-bottom:10px}.menuGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.menuGrid button{padding:12px;border-radius:12px;border:1px solid #35506c;background:#12283f;color:white;text-align:left}
+.window{position:fixed;left:7vw;top:7vh;width:86vw;height:78vh;min-width:280px;background:#0a1828;border:1px solid #4b6783;border-radius:16px;overflow:hidden;box-shadow:0 25px 80px #000b;display:none;z-index:200}.titlebar{height:44px;background:#11263e;display:flex;align-items:center;padding:0 10px;border-bottom:1px solid #35506c;user-select:none}.titlebar b{flex:1}.winbtn{width:34px;height:30px;border:0;border-radius:8px;background:#203953;color:white;margin-left:5px}.content{height:calc(100% - 44px);overflow:auto;background:#0b1624}.browserbar{display:flex;gap:7px;padding:8px;background:#0c1a2a;border-bottom:1px solid #263d57}.browserbar input{flex:1;background:#091522;border:1px solid #36516e;color:#fff;border-radius:10px;padding:9px}.browserbar button{background:#1a3b5d;border:1px solid #4c6f91;color:white;border-radius:10px;padding:0 13px}.browser iframe{width:100%;height:calc(100% - 55px);border:0;background:white}.files{padding:15px}.filecard{padding:14px;margin-bottom:9px;background:#11243a;border:1px solid #29445f;border-radius:12px}.editor textarea{width:100%;height:100%;resize:none;border:0;outline:none;background:#07121f;color:#e9f6ff;padding:16px;font:15px/1.6 ui-monospace,monospace}.terminal{padding:14px;font:14px/1.5 ui-monospace,monospace;color:#a8ffb3;background:#030a06;height:100%;overflow:auto}.termrow{display:flex}.termrow input{flex:1;background:transparent;border:0;outline:0;color:#a8ffb3;font:inherit}.about{padding:22px;line-height:1.7}.about h2{margin-top:0}.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#163d5b;border:1px solid #2c5d7c;margin:3px}
+@media(max-width:600px){#desktop{padding-top:14px}.brand{position:static;text-align:left;margin-bottom:18px}.icons{width:100%;grid-template-columns:repeat(4,1fr)}.glyph{width:54px;height:54px}.window{left:2vw;top:2vh;width:96vw;height:88vh}.titlebar{height:42px}.content{height:calc(100% - 42px)}}
+</style>
+</head>
+<body>
+<div id="desktop">
+  <div class="brand"><b>salp Linux</b><small>Mobile PC v0.1.0</small></div>
+  <div class="icons">
+    <button class="icon" onclick="openWin('browserWin')"><span class="glyph">🌐</span>Browser</button>
+    <button class="icon" onclick="openWin('filesWin')"><span class="glyph">📁</span>Files</button>
+    <button class="icon" onclick="openWin('editorWin')"><span class="glyph">📝</span>Editor</button>
+    <button class="icon" onclick="openWin('terminalWin')"><span class="glyph">💻</span>Terminal</button>
+    <button class="icon" onclick="openExternal('https://salpmusic.github.io/tools/')"><span class="glyph">🧰</span>salp Tools</button>
+    <button class="icon" onclick="openWin('aboutWin')"><span class="glyph">🐧</span>About</button>
+  </div>
+</div>
+
+<div id="startMenu">
+  <div class="startHead">salp Linux</div>
+  <div class="menuGrid">
+    <button onclick="openWin('browserWin')">🌐 Browser</button><button onclick="openWin('filesWin')">📁 Files</button>
+    <button onclick="openWin('editorWin')">📝 Editor</button><button onclick="openWin('terminalWin')">💻 Terminal</button>
+    <button onclick="openExternal('https://salpmusic.github.io/tools/')">🧰 salp Tools</button><button onclick="openWin('aboutWin')">⚙️ System</button>
+  </div>
+</div>
+
+<div id="taskbar"><button id="startBtn" onclick="toggleStart()">◈ Start</button><button class="task" onclick="openWin('browserWin')">🌐</button><button class="task" onclick="openWin('editorWin')">📝</button><button class="task" onclick="openWin('terminalWin')">💻</button><div id="clock" class="clock"></div></div>
+
+<div class="window" id="browserWin"><div class="titlebar"><b>🌐 Browser</b><button class="winbtn" onclick="closeWin('browserWin')">✕</button></div><div class="content browser"><div class="browserbar"><input id="url" value="https://www.google.com"><button onclick="goUrl()">Open</button></div><div class="about"><h2>Browser Launcher</h2><p>URLまたは検索語を入力して <b>Open</b> を押すと、Androidの標準ブラウザで開きます。</p><p>v0.2以降でsalp Linux内蔵ブラウザを強化予定です。</p></div></div></div>
+<div class="window" id="filesWin"><div class="titlebar"><b>📁 Files</b><button class="winbtn" onclick="closeWin('filesWin')">✕</button></div><div class="content files"><div class="filecard">📄 README.txt<br><small>salp Linux Mobile PC prototype</small></div><div class="filecard">📁 Documents<br><small>Android file integration comes in v0.2</small></div><div class="filecard">📁 Downloads<br><small>Storage Access Framework planned</small></div></div></div>
+<div class="window" id="editorWin"><div class="titlebar"><b>📝 Text Editor</b><button class="winbtn" onclick="closeWin('editorWin')">✕</button></div><div class="content editor"><textarea id="editor">Welcome to salp Linux Mobile PC v0.1.0\n\nThis editor already works offline.\n\nNext: Android file open/save integration.</textarea></div></div>
+<div class="window" id="terminalWin"><div class="titlebar"><b>💻 salp Terminal</b><button class="winbtn" onclick="closeWin('terminalWin')">✕</button></div><div class="content terminal" id="term"><div>salp Terminal 0.1</div><div>Type: help</div><br><div class="termrow"><span>salp@android:~$&nbsp;</span><input id="cmd" autocomplete="off" onkeydown="if(event.key==='Enter')runCmd()"></div></div></div>
+<div class="window" id="aboutWin"><div class="titlebar"><b>🐧 About salp Linux</b><button class="winbtn" onclick="closeWin('aboutWin')">✕</button></div><div class="content about"><h2>salp Linux Mobile PC</h2><p>Androidスマホ・タブレット・XREAL Beam Proを、PC風の作業環境として使うためのプロトタイプです。</p><span class="pill">Android 8+</span><span class="pill">Touch</span><span class="pill">Mouse</span><span class="pill">Keyboard</span><span class="pill">WebView</span><p><b>v0.1.0:</b> Desktop / Start Menu / Browser / Files mock / Editor / Terminal mock / salp Tools launcher</p></div></div>
+<script>
+let z=200;function openWin(id){document.getElementById(id).style.display='block';document.getElementById(id).style.zIndex=++z;document.getElementById('startMenu').style.display='none'}function closeWin(id){document.getElementById(id).style.display='none'}function toggleStart(){let s=document.getElementById('startMenu');s.style.display=s.style.display==='block'?'none':'block'}
+function goUrl(){let u=document.getElementById('url').value.trim();if(!/^https?:\/\//i.test(u))u='https://www.google.com/search?q='+encodeURIComponent(u);document.getElementById('url').value=u;openExternal(u)}
+function openExternal(u){try{Android.openExternal(u)}catch(e){location.href=u}}
+function tick(){let d=new Date();document.getElementById('clock').innerHTML=d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+'<br>'+d.toLocaleDateString()}setInterval(tick,1000);tick();
+function runCmd(){let input=document.getElementById('cmd'),cmd=input.value.trim(),term=document.getElementById('term');let out='';if(cmd==='help')out='Commands: help, clear, date, uname, echo TEXT, about';else if(cmd==='clear'){term.innerHTML='<div>salp Terminal 0.1</div><div class="termrow"><span>salp@android:~$&nbsp;</span><input id="cmd" autocomplete="off" onkeydown="if(event.key===\'Enter\')runCmd()"></div>';document.getElementById('cmd').focus();return}else if(cmd==='date')out=new Date().toString();else if(cmd==='uname')out='salp Linux Mobile PC / Android';else if(cmd.startsWith('echo '))out=cmd.slice(5);else if(cmd==='about')out='Prototype shell. Real Linux commands planned via Termux/PRoot.';else out=cmd?'command not found: '+cmd:'';let row=input.parentElement;row.insertAdjacentHTML('beforebegin','<div>salp@android:~$ '+escapeHtml(cmd)+'</div>'+(out?'<div>'+escapeHtml(out)+'</div>':''));input.value='';term.scrollTop=term.scrollHeight}
+function escapeHtml(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+document.querySelectorAll('.window').forEach(w=>w.addEventListener('pointerdown',()=>w.style.zIndex=++z));
+</script>
+</body></html>
