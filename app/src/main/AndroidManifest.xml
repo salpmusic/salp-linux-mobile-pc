@@ -6,6 +6,11 @@
         android:theme="@style/Theme.SalpLinux"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".BrowserActivity"
+            android:screenOrientation="unspecified"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:screenOrientation="unspecified"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"

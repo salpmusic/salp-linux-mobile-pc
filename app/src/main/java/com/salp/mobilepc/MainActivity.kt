@@ -26,8 +26,24 @@ class MainActivity : AppCompatActivity() {
         webView.settings.setSupportZoom(true)
         webView.webChromeClient = WebChromeClient()
         webView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                return false
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean = false
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                if (url?.startsWith("file:///android_asset/") == true) {
+                    view?.evaluateJavascript(
+                        """(function(){
+                          var i=document.getElementById('url');
+                          if(i && !i.dataset.enterReady){
+                            i.dataset.enterReady='1';
+                            i.addEventListener('keydown',function(e){
+                              if(e.key==='Enter'){e.preventDefault();goUrl();}
+                            });
+                          }
+                        })();""",
+                        null
+                    )
+                }
             }
         }
         webView.addJavascriptInterface(AndroidBridge(), "Android")
@@ -41,8 +57,10 @@ class MainActivity : AppCompatActivity() {
     inner class AndroidBridge {
         @JavascriptInterface
         fun openExternal(url: String) {
-            runCatching {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            runOnUiThread {
+                val intent = Intent(this@MainActivity, BrowserActivity::class.java)
+                intent.putExtra("url", url)
+                startActivity(intent)
             }
         }
     }
