@@ -25,6 +25,16 @@ class BrowserActivity : AppCompatActivity() {
     private lateinit var webView: WebView
     private lateinit var address: EditText
     private lateinit var status: TextView
+    private lateinit var modeButton: Button
+    private var desktopMode = true
+
+    private val desktopUA =
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 " +
+        "(KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+
+    private val mobileUA =
+        "Mozilla/5.0 (Linux; Android 15; Mobile) AppleWebKit/537.36 " +
+        "(KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +49,6 @@ class BrowserActivity : AppCompatActivity() {
             text = "←"
             setOnClickListener { if (webView.canGoBack()) webView.goBack() else finish() }
         }
-
         val reload = Button(this).apply {
             text = "↻"
             setOnClickListener { webView.reload() }
@@ -64,6 +73,12 @@ class BrowserActivity : AppCompatActivity() {
             setOnClickListener { loadInput(address.text.toString()) }
         }
 
+        modeButton = Button(this).apply {
+            text = "PC"
+            contentDescription = "PC表示とモバイル表示を切り替え"
+            setOnClickListener { toggleDesktopMode() }
+        }
+
         val external = Button(this).apply {
             text = "↗"
             contentDescription = "外部ブラウザで開く"
@@ -77,10 +92,11 @@ class BrowserActivity : AppCompatActivity() {
         bar.addView(reload)
         bar.addView(address, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
         bar.addView(go)
+        bar.addView(modeButton)
         bar.addView(external)
 
         status = TextView(this).apply {
-            text = "Ready"
+            text = "PC表示 / Ready"
             setPadding(12, 4, 12, 4)
         }
 
@@ -96,6 +112,8 @@ class BrowserActivity : AppCompatActivity() {
         s.builtInZoomControls = true
         s.displayZoomControls = false
         s.mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
+        s.defaultTextEncodingName = "UTF-8"
+        s.userAgentString = desktopUA
 
         CookieManager.getInstance().apply {
             setAcceptCookie(true)
@@ -104,7 +122,8 @@ class BrowserActivity : AppCompatActivity() {
 
         webView.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                status.text = if (newProgress < 100) "Loading… $newProgress%" else "Ready"
+                val mode = if (desktopMode) "PC表示" else "Mobile表示"
+                status.text = if (newProgress < 100) "$mode / Loading… $newProgress%" else "$mode / Ready"
             }
         }
 
@@ -122,10 +141,7 @@ class BrowserActivity : AppCompatActivity() {
 
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
-                if (!url.isNullOrBlank()) {
-                    address.setText(url)
-                    status.text = "Loading…"
-                }
+                if (!url.isNullOrBlank()) address.setText(url)
             }
 
             override fun onPageFinished(view: WebView?, url: String?) {
@@ -165,6 +181,18 @@ class BrowserActivity : AppCompatActivity() {
         loadInput(intent.getStringExtra("url") ?: "https://www.google.com")
     }
 
+    private fun toggleDesktopMode() {
+        desktopMode = !desktopMode
+        val s = webView.settings
+        s.userAgentString = if (desktopMode) desktopUA else mobileUA
+        s.useWideViewPort = desktopMode
+        s.loadWithOverviewMode = desktopMode
+        modeButton.text = if (desktopMode) "PC" else "M"
+        val mode = if (desktopMode) "PC表示" else "Mobile表示"
+        status.text = "$mode / Reloading…"
+        webView.reload()
+    }
+
     private fun normalizeInput(raw: String): String {
         val s = raw.trim()
         if (s.isEmpty()) return ""
@@ -180,7 +208,6 @@ class BrowserActivity : AppCompatActivity() {
         val url = normalizeInput(raw)
         if (url.isBlank()) return
         address.setText(url)
-        status.text = "Loading…"
         webView.loadUrl(url)
     }
 
