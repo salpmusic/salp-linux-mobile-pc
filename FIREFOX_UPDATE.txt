@@ -1,0 +1,7 @@
+salp Linux Mobile PC v0.2.0 Gecko Beta
+After unzip:
+python3 apply_ui_patch.py
+rm apply_ui_patch.py
+git add .
+git commit -m f
+git push
