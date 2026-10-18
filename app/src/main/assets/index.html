@@ -5,23 +5,57 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <title>salp Linux Mobile PC</title>
 <style>
-:root{--bg:#07111f;--panel:#0d1b2e;--panel2:#13243b;--line:#28405f;--text:#eff7ff;--muted:#9fb0c6;--accent:#62d0ff;--task:#08111d}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif}
+:root{--bg:#07111f;--panel:#0d1b2e;--panel2:#13243b;--line:#28405f;--text:#eff7ff;--muted:#9fb0c6;--accent:#62d0ff;--task:#08111d;--tb:56px;--title:46px}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;font-size:15px}
 body{background:radial-gradient(circle at 20% 10%,#16375a 0,transparent 34%),linear-gradient(135deg,#07111f,#0a1830 55%,#10223d)}
-#desktop{position:relative;height:100%;padding:20px 16px 66px;overflow:auto}
-.brand{position:absolute;right:18px;top:16px;text-align:right;color:#d8f5ff;opacity:.9}.brand b{font-size:22px}.brand small{display:block;color:var(--muted)}
-.icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:14px;width:min(520px,80vw)}
-.icon{border:0;background:transparent;color:#fff;padding:8px;border-radius:14px;font-size:13px}.icon:hover,.icon:focus{background:#ffffff14}.glyph{width:62px;height:62px;border-radius:16px;background:linear-gradient(145deg,#1d4d77,#173655);display:grid;place-items:center;margin:auto auto 6px;font-size:31px;border:1px solid #ffffff1f;box-shadow:0 10px 20px #0005}
-#taskbar{position:fixed;left:0;right:0;bottom:0;height:54px;background:#07101bea;border-top:1px solid #34506d;display:flex;align-items:center;gap:8px;padding:6px 10px;backdrop-filter:blur(12px);z-index:1000}
-#startBtn{height:40px;border:1px solid #4b6d8c;background:#122941;color:#fff;border-radius:12px;padding:0 15px;font-weight:700}.task{height:40px;min-width:42px;border:1px solid #36516e;background:#0e2035;color:#fff;border-radius:11px}.clock{margin-left:auto;text-align:right;font-size:12px;color:#c7d9ea;line-height:1.25}
-#startMenu{position:fixed;left:10px;bottom:62px;width:min(330px,calc(100vw - 20px));background:#0c1b2ceF;border:1px solid #45627f;border-radius:17px;padding:14px;box-shadow:0 20px 60px #000a;display:none;z-index:1100}.startHead{font-size:18px;font-weight:800;margin-bottom:10px}.menuGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.menuGrid button{padding:12px;border-radius:12px;border:1px solid #35506c;background:#12283f;color:white;text-align:left}
-.window{position:fixed;left:7vw;top:7vh;width:86vw;height:78vh;min-width:280px;background:#0a1828;border:1px solid #4b6783;border-radius:16px;overflow:hidden;box-shadow:0 25px 80px #000b;display:none;z-index:200}.titlebar{height:44px;background:#11263e;display:flex;align-items:center;padding:0 10px;border-bottom:1px solid #35506c;user-select:none}.titlebar b{flex:1}.winbtn{width:34px;height:30px;border:0;border-radius:8px;background:#203953;color:white;margin-left:5px}.content{height:calc(100% - 44px);overflow:auto;background:#0b1624}.browserbar{display:flex;gap:7px;padding:8px;background:#0c1a2a;border-bottom:1px solid #263d57}.browserbar input{flex:1;background:#091522;border:1px solid #36516e;color:#fff;border-radius:10px;padding:9px}.browserbar button{background:#1a3b5d;border:1px solid #4c6f91;color:white;border-radius:10px;padding:0 13px}.browser iframe{width:100%;height:calc(100% - 55px);border:0;background:white}.files{padding:15px}.filecard{padding:14px;margin-bottom:9px;background:#11243a;border:1px solid #29445f;border-radius:12px}.editor textarea{width:100%;height:100%;resize:none;border:0;outline:none;background:#07121f;color:#e9f6ff;padding:16px;font:15px/1.6 ui-monospace,monospace}.terminal{padding:14px;font:14px/1.5 ui-monospace,monospace;color:#a8ffb3;background:#030a06;height:100%;overflow:auto}.termrow{display:flex}.termrow input{flex:1;background:transparent;border:0;outline:0;color:#a8ffb3;font:inherit}.about{padding:22px;line-height:1.7}.about h2{margin-top:0}.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#163d5b;border:1px solid #2c5d7c;margin:3px}
-@media(max-width:600px){#desktop{padding-top:14px}.brand{position:static;text-align:left;margin-bottom:18px}.icons{width:100%;grid-template-columns:repeat(4,1fr)}.glyph{width:54px;height:54px}.window{left:2vw;top:2vh;width:96vw;height:88vh}.titlebar{height:42px}.content{height:calc(100% - 42px)}}
+button{font:inherit;cursor:pointer}
+#desktop{position:relative;height:100%;padding:20px 16px calc(var(--tb) + 12px);overflow:auto}
+.brand{position:absolute;right:18px;top:16px;text-align:right;color:#d8f5ff;opacity:.9}.brand b{font-size:22px}.brand small{display:block;color:var(--muted);font-size:14px}
+.icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:14px;width:min(560px,80vw)}
+.icon{border:0;background:transparent;color:#fff;padding:8px;border-radius:14px;font-size:14px}.icon:hover,.icon:focus-visible{background:#ffffff14;outline:none}.glyph{width:62px;height:62px;border-radius:16px;background:linear-gradient(145deg,#1d4d77,#173655);display:grid;place-items:center;margin:auto auto 6px;font-size:31px;border:1px solid #ffffff1f;box-shadow:0 10px 20px #0005}
+#taskbar{position:fixed;left:0;right:0;bottom:0;height:var(--tb);background:#07101bea;border-top:1px solid #34506d;display:flex;align-items:center;gap:6px;padding:6px 10px;backdrop-filter:blur(12px);z-index:100000}
+#startBtn{height:42px;border:1px solid #4b6d8c;background:#122941;color:#fff;border-radius:12px;padding:0 15px;font-weight:700;flex:none}
+#tasks{display:flex;gap:6px;overflow-x:auto;min-width:0;flex:1;scrollbar-width:none}
+.task{height:42px;min-width:46px;border:1px solid #36516e;background:#0e2035;color:#fff;border-radius:11px;padding:0 10px;display:flex;align-items:center;gap:6px;flex:none;position:relative;white-space:nowrap}
+.task .tl{font-size:13px}.task.open::after{content:"";position:absolute;left:30%;right:30%;bottom:3px;height:3px;border-radius:2px;background:#5f87a8}
+.task.active{background:#1b3d5e;border-color:#62d0ff}.task.active::after{background:var(--accent)}.task.min{opacity:.65}
+.task.extra{display:none}.task.extra.open{display:flex}
+.clock{margin-left:auto;text-align:right;font-size:12px;color:#c7d9ea;line-height:1.25;flex:none;padding-left:6px}
+#startMenu{position:fixed;left:10px;bottom:calc(var(--tb) + 8px);width:min(340px,calc(100vw - 20px));background:#0c1b2cef;border:1px solid #45627f;border-radius:17px;padding:14px;box-shadow:0 20px 60px #000a;display:none;z-index:100001}.startHead{font-size:18px;font-weight:800;margin-bottom:10px}.startHead small{display:block;font-weight:400;font-size:12px;color:var(--muted)}.menuGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.menuGrid button{padding:12px;border-radius:12px;border:1px solid #35506c;background:#12283f;color:white;text-align:left}
+.window{position:fixed;left:40px;top:30px;width:720px;height:480px;min-width:260px;min-height:180px;background:#0a1828;border:1px solid #4b6783;border-radius:14px;overflow:hidden;box-shadow:0 25px 80px #000b;display:none;z-index:200;flex-direction:column}
+.window.shown{display:flex}.window.active{border-color:#6aa6d4}.window.active .titlebar{background:#173352}
+.window.max{left:0!important;top:0!important;width:100%!important;height:calc(100% - var(--tb))!important;border-radius:0}
+.titlebar{height:var(--title);flex:none;background:#11263e;display:flex;align-items:center;padding:0 6px 0 12px;border-bottom:1px solid #35506c;user-select:none;-webkit-user-select:none;touch-action:none;cursor:move}
+.titlebar b{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+.winbtn{width:40px;height:34px;border:0;border-radius:8px;background:#203953;color:white;margin-left:5px;font-size:15px;touch-action:manipulation;cursor:pointer}.winbtn:hover{background:#2d4f72}.winbtn.close:hover{background:#b33a3a}
+.content{flex:1;min-height:0;overflow:auto;background:#0b1624}
+.resize{position:absolute;right:0;bottom:0;width:22px;height:22px;cursor:nwse-resize;touch-action:none;background:linear-gradient(135deg,transparent 55%,#6a8db0 55%,#6a8db0 62%,transparent 62%,transparent 72%,#6a8db0 72%,#6a8db0 79%,transparent 79%)}
+.window.max .resize{display:none}
+.toolbar{display:flex;flex-wrap:wrap;gap:7px;padding:8px;background:#0c1a2a;border-bottom:1px solid #263d57;align-items:center}
+.toolbar button,.browserbar button{min-height:38px;background:#1a3b5d;border:1px solid #4c6f91;color:white;border-radius:10px;padding:0 12px}
+.toolbar button:disabled{opacity:.45}
+.browserbar{display:flex;gap:7px;padding:8px;background:#0c1a2a;border-bottom:1px solid #263d57}.browserbar input{flex:1;min-width:0;background:#091522;border:1px solid #36516e;color:#fff;border-radius:10px;padding:9px;font:inherit}
+.files{display:flex;flex-direction:column;overflow:hidden}
+.crumbs{padding:6px 10px;font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:2px;align-items:center;border-bottom:1px solid #1d3149}
+.crumbs:empty{display:none}.crumbs button{background:transparent;border:0;color:var(--accent);padding:4px 6px;border-radius:6px}.crumbs button:hover{background:#ffffff12}
+.flist{flex:1;overflow:auto;padding:6px}
+.frow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 12px;min-height:48px;margin-bottom:4px;background:#11243a;border:1px solid #29445f;border-radius:10px;color:#fff}
+.frow:hover,.frow:focus-visible{background:#183150;outline:none}.frow .fi{font-size:22px;flex:none;width:28px;text-align:center}.frow .fn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.frow .fm{font-size:12px;color:var(--muted);flex:none;text-align:right}
+.empty{padding:22px;color:var(--muted);line-height:1.7}
+.editor{display:flex;flex-direction:column;overflow:hidden}
+.editor textarea{flex:1;width:100%;min-height:0;resize:none;border:0;outline:none;background:#07121f;color:#e9f6ff;padding:14px;font:15px/1.6 ui-monospace,monospace}
+.fname{font-size:14px;color:#d8f5ff;margin-left:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40%}
+.status{padding:5px 10px;font-size:13px;color:var(--muted);background:#0a1626;border-top:1px solid #1d3149;min-height:26px}.status.err{color:#ff9d9d}.status.ok{color:#9dffb5}
+.terminal{padding:14px;font:14px/1.5 ui-monospace,monospace;color:#a8ffb3;background:#030a06}.termrow{display:flex}.termrow input{flex:1;background:transparent;border:0;outline:0;color:#a8ffb3;font:inherit}
+.about{padding:22px;line-height:1.7}.about h2{margin-top:0}.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#163d5b;border:1px solid #2c5d7c;margin:3px}
+/* narrow / phone portrait: windows become full width, no dragging */
+@media(max-width:700px){#desktop{padding-top:14px}.brand{position:static;text-align:left;margin-bottom:18px}.icons{width:100%;grid-template-columns:repeat(4,1fr)}.glyph{width:54px;height:54px}
+ .window{left:0!important;top:0!important;width:100%!important;height:calc(100% - var(--tb))!important;border-radius:0}.resize{display:none}.titlebar{cursor:default}.task .tl{display:none}.fname{max-width:100%}}
 </style>
 </head>
 <body>
 <div id="desktop">
-  <div class="brand"><b>salp Linux</b><small>Mobile PC v0.2.0 Gecko Beta</small></div>
+  <div class="brand"><b>salp Linux Mobile PC v0.3.0</b><small>Desktop &amp; Files Beta</small></div>
   <div class="icons">
     <button class="icon" onclick="openWin('browserWin')"><span class="glyph">🌐</span>Browser</button>
     <button class="icon" onclick="openWin('filesWin')"><span class="glyph">📁</span>Files</button>
@@ -33,7 +67,7 @@ body{background:radial-gradient(circle at 20% 10%,#16375a 0,transparent 34%),lin
 </div>
 
 <div id="startMenu">
-  <div class="startHead">salp Linux</div>
+  <div class="startHead">salp Linux<small>Mobile PC v0.3.0 / Desktop &amp; Files Beta</small></div>
   <div class="menuGrid">
     <button onclick="openWin('browserWin')">🌐 Browser</button><button onclick="openWin('filesWin')">📁 Files</button>
     <button onclick="openWin('editorWin')">📝 Editor</button><button onclick="openWin('terminalWin')">💻 Terminal</button>
@@ -41,20 +75,176 @@ body{background:radial-gradient(circle at 20% 10%,#16375a 0,transparent 34%),lin
   </div>
 </div>
 
-<div id="taskbar"><button id="startBtn" onclick="toggleStart()">◈ Start</button><button class="task" onclick="openWin('browserWin')">🌐</button><button class="task" onclick="openWin('editorWin')">📝</button><button class="task" onclick="openWin('terminalWin')">💻</button><div id="clock" class="clock"></div></div>
+<div id="taskbar"><button id="startBtn" onclick="toggleStart()">◈ Start</button>
+  <div id="tasks">
+    <button class="task" data-win="browserWin" title="Browser">🌐<span class="tl">Browser</span></button>
+    <button class="task" data-win="filesWin" title="Files">📁<span class="tl">Files</span></button>
+    <button class="task" data-win="editorWin" title="Editor">📝<span class="tl">Editor</span></button>
+    <button class="task" data-win="terminalWin" title="Terminal">💻<span class="tl">Terminal</span></button>
+    <button class="task extra" data-win="aboutWin" title="About">🐧<span class="tl">About</span></button>
+  </div>
+  <div id="clock" class="clock"></div></div>
 
-<div class="window" id="browserWin"><div class="titlebar"><b>🌐 Browser</b><button class="winbtn" onclick="closeWin('browserWin')">✕</button></div><div class="content browser"><div class="browserbar"><input id="url" value="https://www.google.com"><button onclick="goUrl()">Open</button></div><div class="about"><h2>Browser Launcher</h2><p>URLまたは検索語を入力して <b>Open</b> を押すと、Firefox Geckoエンジンの内蔵ブラウザで開きます。</p><p>v0.2.0ではFirefox GeckoViewを実験搭載。PC / Mobile表示を切り替えできます。</p></div></div></div>
-<div class="window" id="filesWin"><div class="titlebar"><b>📁 Files</b><button class="winbtn" onclick="closeWin('filesWin')">✕</button></div><div class="content files"><div class="filecard">📄 README.txt<br><small>salp Linux Mobile PC prototype</small></div><div class="filecard">📁 Documents<br><small>Android file integration comes in v0.2</small></div><div class="filecard">📁 Downloads<br><small>Storage Access Framework planned</small></div></div></div>
-<div class="window" id="editorWin"><div class="titlebar"><b>📝 Text Editor</b><button class="winbtn" onclick="closeWin('editorWin')">✕</button></div><div class="content editor"><textarea id="editor">Welcome to salp Linux Mobile PC v0.2.0 Gecko Beta\n\nThis editor already works offline.\n\nNext: Android file open/save integration.</textarea></div></div>
-<div class="window" id="terminalWin"><div class="titlebar"><b>💻 salp Terminal</b><button class="winbtn" onclick="closeWin('terminalWin')">✕</button></div><div class="content terminal" id="term"><div>salp Terminal 0.1</div><div>Type: help</div><br><div class="termrow"><span>salp@android:~$&nbsp;</span><input id="cmd" autocomplete="off" onkeydown="if(event.key==='Enter')runCmd()"></div></div></div>
-<div class="window" id="aboutWin"><div class="titlebar"><b>🐧 About salp Linux</b><button class="winbtn" onclick="closeWin('aboutWin')">✕</button></div><div class="content about"><h2>salp Linux Mobile PC</h2><p>Androidスマホ・タブレット・XREAL Beam Proを、PC風の作業環境として使うためのプロトタイプです。</p><span class="pill">Android 8+</span><span class="pill">Touch</span><span class="pill">Mouse</span><span class="pill">Keyboard</span><span class="pill">Firefox Gecko</span><p><b>v0.2.0:</b> Firefox GeckoView browser / PC-Mobile switch / WebView fallback / Desktop / Editor / Terminal</p></div></div>
+<div class="window" id="browserWin" data-title="🌐 Browser"><div class="content browser"><div class="browserbar"><input id="url" value="https://www.google.com" enterkeyhint="go"><button onclick="goUrl()">Open</button></div><div class="about"><h2>Browser Launcher</h2><p>URLまたは検索語を入力して <b>Open</b> を押すと、Firefox Geckoエンジンの内蔵ブラウザで開きます。</p><p>ブラウザ画面の上部ボタンで PC / Mobile 表示を切り替えできます。</p></div></div></div>
+
+<div class="window" id="filesWin" data-title="📁 Files"><div class="content files">
+  <div class="toolbar"><button onclick="Files.pick()">📂 フォルダを開く</button><button id="fUp" onclick="Files.up()" disabled>⬆ 戻る</button><button id="fReload" onclick="Files.reload()" disabled>↻ 更新</button></div>
+  <div class="crumbs" id="fCrumbs"></div>
+  <div class="flist" id="fList"><div class="empty">「フォルダを開く」でAndroidのフォルダ選択画面から作業フォルダを選んでください。<br>テキストファイルはEditorで、その他は対応アプリで開きます。</div></div>
+  <div class="status" id="fStatus"></div>
+</div></div>
+
+<div class="window" id="editorWin" data-title="📝 Text Editor"><div class="content editor">
+  <div class="toolbar"><button onclick="Editor.newFile()">🆕 新規</button><button onclick="Editor.open()">📂 開く</button><button onclick="Editor.save()" title="Ctrl+S">💾 保存</button><button onclick="Editor.saveAs()">📄 名前を付けて保存</button><span class="fname" id="eName">untitled.txt</span></div>
+  <textarea id="editor" spellcheck="false">Welcome to salp Linux Mobile PC v0.3.0 Desktop &amp; Files Beta
+
+Files でフォルダを開き、テキストファイルをタップすると Editor で開けます。
+「保存」で元ファイルに上書き、「名前を付けて保存」で新規ファイルとして保存します（UTF-8）。</textarea>
+  <div class="status" id="eStatus">新規ファイル（未保存）</div>
+</div></div>
+
+<div class="window" id="terminalWin" data-title="💻 salp Terminal"><div class="content terminal" id="term"><div>salp Terminal 0.1</div><div>Type: help</div><br><div class="termrow"><span>salp@android:~$&nbsp;</span><input id="cmd" autocomplete="off" onkeydown="if(event.key==='Enter')runCmd()"></div></div></div>
+
+<div class="window" id="aboutWin" data-title="🐧 About salp Linux"><div class="content about"><h2>salp Linux Mobile PC v0.3.0</h2><p><b>Desktop &amp; Files Beta（テスト版）</b></p><p>Androidスマホ・タブレット・XREAL Beam Proを、PC風の作業環境として使うためのプロトタイプです。</p><span class="pill">Android 8+</span><span class="pill">Touch</span><span class="pill">Mouse</span><span class="pill">Keyboard</span><span class="pill">Firefox Gecko</span><span class="pill">Storage Access Framework</span><p><b>v0.3.0:</b> Files（Androidのフォルダ選択で実ファイル閲覧）/ Editor（開く・保存・名前を付けて保存, UTF-8）/ ウィンドウの移動・最大化・最小化・タスクバー復帰</p><p><b>v0.2.0:</b> Firefox GeckoView browser / PC-Mobile switch / WebView fallback</p></div></div>
+
 <script>
-let z=200;function openWin(id){document.getElementById(id).style.display='block';document.getElementById(id).style.zIndex=++z;document.getElementById('startMenu').style.display='none'}function closeWin(id){document.getElementById(id).style.display='none'}function toggleStart(){let s=document.getElementById('startMenu');s.style.display=s.style.display==='block'?'none':'block'}
-function goUrl(){let u=document.getElementById('url').value.trim();if(!/^https?:\/\//i.test(u))u='https://www.google.com/search?q='+encodeURIComponent(u);document.getElementById('url').value=u;openExternal(u)}
+/* ---------- bridge ---------- */
+const B=window.AndroidBridge||window.Android||null;
+function hasBridge(fn){return !!(B&&typeof B[fn]==='function')}
 function openExternal(u){try{Android.openExternal(u)}catch(e){location.href=u}}
-function tick(){let d=new Date();document.getElementById('clock').innerHTML=d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+'<br>'+d.toLocaleDateString()}setInterval(tick,1000);tick();
-function runCmd(){let input=document.getElementById('cmd'),cmd=input.value.trim(),term=document.getElementById('term');let out='';if(cmd==='help')out='Commands: help, clear, date, uname, echo TEXT, about';else if(cmd==='clear'){term.innerHTML='<div>salp Terminal 0.1</div><div class="termrow"><span>salp@android:~$&nbsp;</span><input id="cmd" autocomplete="off" onkeydown="if(event.key===\'Enter\')runCmd()"></div>';document.getElementById('cmd').focus();return}else if(cmd==='date')out=new Date().toString();else if(cmd==='uname')out='salp Linux Mobile PC / Android';else if(cmd.startsWith('echo '))out=cmd.slice(5);else if(cmd==='about')out='Prototype shell. Real Linux commands planned via Termux/PRoot.';else out=cmd?'command not found: '+cmd:'';let row=input.parentElement;row.insertAdjacentHTML('beforebegin','<div>salp@android:~$ '+escapeHtml(cmd)+'</div>'+(out?'<div>'+escapeHtml(out)+'</div>':''));input.value='';term.scrollTop=term.scrollHeight}
+function goUrl(){let u=document.getElementById('url').value.trim();if(!u)return;if(!/^https?:\/\//i.test(u))u='https://www.google.com/search?q='+encodeURIComponent(u);document.getElementById('url').value=u;openExternal(u)}
+
+/* ---------- window manager ---------- */
+const TB=56;let z=200,cascade=0;
+const narrow=()=>window.innerWidth<=700;
+function $(id){return document.getElementById(id)}
+function setupWindow(w){
+  const bar=document.createElement('div');bar.className='titlebar';
+  bar.innerHTML='<b></b><button class="winbtn" data-a="min" title="最小化">—</button><button class="winbtn" data-a="max" title="最大化">☐</button><button class="winbtn close" data-a="close" title="閉じる">✕</button>';
+  bar.querySelector('b').textContent=w.dataset.title||w.id;
+  w.insertBefore(bar,w.firstChild);
+  const rz=document.createElement('div');rz.className='resize';w.appendChild(rz);
+  bar.addEventListener('click',e=>{const a=e.target.closest('[data-a]');if(!a)return;e.stopPropagation();
+    if(a.dataset.a==='min')minimizeWin(w.id);else if(a.dataset.a==='max')toggleMax(w.id);else closeWin(w.id)});
+  bar.addEventListener('dblclick',e=>{if(!e.target.closest('button'))toggleMax(w.id)});
+  w.addEventListener('pointerdown',()=>focusWin(w.id),true);
+  dragHandle(bar,w,'move');dragHandle(rz,w,'resize');
+}
+function dragHandle(h,w,mode){
+  let st=null;
+  h.addEventListener('pointerdown',e=>{
+    if(e.button!==undefined&&e.button!==0)return;
+    if(mode==='move'&&e.target.closest('button'))return;
+    if(narrow()||w.classList.contains('max'))return;
+    const r=w.getBoundingClientRect();
+    st={id:e.pointerId,x:e.clientX,y:e.clientY,l:r.left,t:r.top,w:r.width,h:r.height};
+    try{h.setPointerCapture(e.pointerId)}catch(_){}
+    e.preventDefault();
+  });
+  h.addEventListener('pointermove',e=>{
+    if(!st||e.pointerId!==st.id)return;
+    const dx=e.clientX-st.x,dy=e.clientY-st.y,W=innerWidth,H=innerHeight-TB;
+    if(mode==='move'){
+      w.style.left=Math.min(Math.max(st.l+dx,80-st.w),W-80)+'px';
+      w.style.top=Math.min(Math.max(st.t+dy,0),H-46)+'px';
+    }else{
+      w.style.width=Math.max(260,Math.min(st.w+dx,W-st.l))+'px';
+      w.style.height=Math.max(180,Math.min(st.h+dy,H-st.t))+'px';
+    }
+  });
+  const end=e=>{if(!st||e.pointerId!==st.id)return;st=null;try{h.releasePointerCapture(e.pointerId)}catch(_){}};
+  h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);h.addEventListener('lostpointercapture',()=>{st=null});
+}
+function placeWin(w){
+  if(w.dataset.placed)return;w.dataset.placed='1';
+  const W=innerWidth,H=innerHeight-TB;
+  const ww=Math.min(Math.max(Math.round(W*0.62),360),W-24,960),hh=Math.min(Math.max(Math.round(H*0.72),260),H-24,720);
+  const off=(cascade++%6)*32;
+  w.style.width=ww+'px';w.style.height=hh+'px';
+  w.style.left=Math.max(8,Math.min(Math.round((W-ww)/2)-80+off,W-ww-8))+'px';
+  w.style.top=Math.max(8,Math.min(Math.round((H-hh)/2)-50+off,H-hh-8))+'px';
+}
+function openWin(id){const w=$(id);if(!w)return;placeWin(w);w.classList.add('shown');w.dataset.state='open';focusWin(id);$('startMenu').style.display='none';updateTasks()}
+function focusWin(id){const w=$(id);document.querySelectorAll('.window.active').forEach(x=>{if(x!==w)x.classList.remove('active')});w.style.zIndex=++z;w.classList.add('active');updateTasks()}
+function closeWin(id){const w=$(id);w.classList.remove('shown','active','max');delete w.dataset.state;updateTasks()}
+function minimizeWin(id){const w=$(id);w.classList.remove('shown','active');w.dataset.state='min';updateTasks()}
+function toggleMax(id){const w=$(id);w.classList.toggle('max');const b=w.querySelector('[data-a=max]');b.textContent=w.classList.contains('max')?'❐':'☐';b.title=w.classList.contains('max')?'元に戻す':'最大化';focusWin(id)}
+function topWin(){let best=null,bz=-1;document.querySelectorAll('.window.shown').forEach(w=>{const v=+w.style.zIndex||0;if(v>bz){bz=v;best=w}});return best}
+function taskClick(id){const w=$(id);const st=w.dataset.state;
+  if(!st)openWin(id);else if(st==='min')openWin(id);else if(topWin()===w&&w.classList.contains('active'))minimizeWin(id);else focusWin(id)}
+function updateTasks(){const top=topWin();document.querySelectorAll('.task[data-win]').forEach(t=>{const w=$(t.dataset.win),st=w.dataset.state;
+  t.classList.toggle('open',!!st);t.classList.toggle('min',st==='min');t.classList.toggle('active',st==='open'&&w===top&&w.classList.contains('active'))})}
+function clampAll(){const W=innerWidth,H=innerHeight-TB;document.querySelectorAll('.window[data-placed]').forEach(w=>{
+  const ww=Math.min(parseFloat(w.style.width)||400,W),hh=Math.min(parseFloat(w.style.height)||300,H);w.style.width=ww+'px';w.style.height=hh+'px';
+  w.style.left=Math.min(Math.max(parseFloat(w.style.left)||0,80-ww),W-80)+'px';w.style.top=Math.min(Math.max(parseFloat(w.style.top)||0,0),Math.max(0,H-46))+'px'})}
+function toggleStart(){let s=$('startMenu');s.style.display=s.style.display==='block'?'none':'block'}
+document.querySelectorAll('.window').forEach(setupWindow);
+document.querySelectorAll('.task[data-win]').forEach(t=>t.addEventListener('click',()=>taskClick(t.dataset.win)));
+$('desktop').addEventListener('pointerdown',()=>{$('startMenu').style.display='none'});
+window.addEventListener('resize',clampAll);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('startMenu').style.display='none';
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'&&$('editorWin').dataset.state==='open'){e.preventDefault();Editor.save()}});
+
+function tick(){let d=new Date();$('clock').innerHTML=d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+'<br>'+d.toLocaleDateString()}setInterval(tick,1000);tick();
+
+/* ---------- Files (tokens are opaque; URIs stay in Kotlin) ---------- */
+const Files={stack:[],
+  status(m,cls){const s=$('fStatus');s.textContent=m||'';s.className='status'+(cls?' '+cls:'')},
+  pick(){if(!hasBridge('pickFolder')){this.status('Androidアプリ内でのみ利用できます','err');return}this.status('フォルダを選択してください…');B.pickFolder()},
+  up(){if(this.stack.length>1){this.stack.pop();this.load()}},
+  reload(){if(this.stack.length)this.load()},
+  go(i){this.stack=this.stack.slice(0,i+1);this.load()},
+  load(){const cur=this.stack[this.stack.length-1];if(!cur)return;this.status('読み込み中…');this.crumbs();B.listDir(cur.token)},
+  crumbs(){const c=$('fCrumbs');c.innerHTML='';this.stack.forEach((s,i)=>{if(i)c.appendChild(document.createTextNode(' › '));const b=document.createElement('button');b.textContent=(i?'':'📁 ')+s.name;b.onclick=()=>this.go(i);c.appendChild(b)});
+    $('fUp').disabled=this.stack.length<2;$('fReload').disabled=!this.stack.length},
+  showPickPrompt(msg){this.stack=[];this.crumbs();$('fList').innerHTML='';const d=document.createElement('div');d.className='empty';d.textContent=msg;const b=document.createElement('button');b.textContent='📂 フォルダを選択';b.style.cssText='display:block;margin-top:12px;min-height:40px;padding:0 14px;border-radius:10px;border:1px solid #4c6f91;background:#1a3b5d;color:#fff';b.onclick=()=>this.pick();d.appendChild(b);$('fList').appendChild(d)},
+  onPickCancelled(){this.status('フォルダ選択をキャンセルしました')},
+  onFolder(r){if(!r.ok){if(r.hadFolder)this.showPickPrompt('前回のフォルダへのアクセス権がありません。もう一度フォルダを選択してください。');return}
+    this.stack=[{token:r.token,name:r.name}];this.load()},
+  onList(r){const cur=this.stack[this.stack.length-1];if(!cur||cur.token!==r.token)return;
+    if(!r.ok){if(r.needPick)this.showPickPrompt(r.error);this.status(r.error,'err');return}
+    const items=r.items.sort((a,b)=>(b.dir-a.dir)||a.name.localeCompare(b.name,'ja'));const L=$('fList');L.innerHTML='';
+    if(!items.length){L.innerHTML='<div class="empty">（空のフォルダ）</div>'}
+    items.forEach(it=>{const b=document.createElement('button');b.className='frow';
+      const ic=it.dir?'📁':it.text?'📝':/^image\//.test(it.mime)?'🖼️':/^audio\//.test(it.mime)?'🎵':/^video\//.test(it.mime)?'🎬':/pdf/.test(it.mime)?'📕':'📄';
+      b.innerHTML='<span class="fi"></span><span class="fn"></span><span class="fm"></span>';
+      b.children[0].textContent=ic;b.children[1].textContent=it.name;
+      b.children[2].textContent=it.dir?'フォルダ':[kindOf(it),fmtSize(it.size)].filter(Boolean).join(' · ');
+      b.onclick=()=>{if(it.dir){this.stack.push({token:it.token,name:it.name});this.load()}else this.open(it)};L.appendChild(b)});
+    this.status(items.length+' 項目')},
+  open(it){if(it.text){if(Editor.dirty&&!confirm('Editorに未保存の変更があります。破棄して開きますか？'))return;this.status(it.name+' をEditorで開いています…');openWin('editorWin');Editor.status('読み込み中…')}
+    else this.status(it.name+' を対応アプリで開きます…');B.openEntry(it.token)}
+};
+function fmtSize(n){if(n==null||n<0)return'';if(n<1024)return n+' B';if(n<1048576)return(n/1024).toFixed(1)+' KB';if(n<1073741824)return(n/1048576).toFixed(1)+' MB';return(n/1073741824).toFixed(2)+' GB'}
+function kindOf(it){const e=(it.name.split('.').pop()||'').toUpperCase();return it.name.includes('.')&&e.length<=5?e:(it.mime||'').split('/').pop()}
+window.salpFiles=Files;
+
+/* ---------- Editor (current file handle is held in Kotlin) ---------- */
+const Editor={name:'untitled.txt',dirty:false,
+  ta:$('editor'),
+  status(m,cls){const s=$('eStatus');s.textContent=m||'';s.className='status'+(cls?' '+cls:'')},
+  title(){$('eName').textContent=(this.dirty?'● ':'')+this.name},
+  setDirty(d){this.dirty=d;this.title()},
+  need(fn){if(hasBridge(fn))return true;this.status('Androidアプリ内でのみ利用できます','err');return false},
+  newFile(){if(this.dirty&&!confirm('未保存の変更を破棄して新規作成しますか？'))return;if(hasBridge('editorNew'))B.editorNew();this.ta.value='';this.name='untitled.txt';this.setDirty(false);this.status('新規ファイル（未保存）');this.ta.focus()},
+  open(){if(this.dirty&&!confirm('未保存の変更を破棄して開きますか？'))return;if(this.need('editorOpen')){this.status('ファイルを選択してください…');B.editorOpen()}},
+  save(){if(!this.need('editorSave'))return;this.status('保存中…');B.editorSave(this.ta.value)},
+  saveAs(){if(!this.need('editorSaveAs'))return;this.status('保存先を選択してください…');B.editorSaveAs(this.name||'untitled.txt',this.ta.value)},
+  onLoaded(r){openWin('editorWin');if(!r.ok){this.status('開けませんでした: '+r.error,'err');try{B.toast('開けませんでした')}catch(_){}return}
+    this.ta.value=r.text;this.name=r.name;this.setDirty(false);this.ta.scrollTop=0;
+    this.status(r.writable?'開きました: '+r.name+'（UTF-8）':'開きました（読み取り専用の可能性。保存できない場合は「名前を付けて保存」）',r.writable?'ok':'')},
+  onSaved(r){if(!r.ok){this.status((r.cancelled?'':'保存できませんでした: ')+r.error+(r.suggestSaveAs?' →「名前を付けて保存」をお試しください':''),r.cancelled?'':'err');return}
+    this.name=r.name;this.setDirty(false);this.status('保存しました: '+r.name+'（'+fmtSize(r.bytes)+(r.verified?'、再読込で一致を確認':'')+'）','ok')}
+};
+Editor.ta.addEventListener('input',()=>{if(!Editor.dirty)Editor.setDirty(true)});
+window.salpEditor=Editor;
+Editor.title();
+
+/* restore last folder (Kotlin checks the persisted permission) */
+if(hasBridge('restoreLastFolder'))B.restoreLastFolder();
+
+/* ---------- Terminal (unchanged) ---------- */
+function runCmd(){let input=document.getElementById('cmd'),cmd=input.value.trim(),term=document.getElementById('term');let out='';if(cmd==='help')out='Commands: help, clear, date, uname, echo TEXT, about';else if(cmd==='clear'){term.innerHTML='<div>salp Terminal 0.1</div><div class="termrow"><span>salp@android:~$&nbsp;</span><input id="cmd" autocomplete="off" onkeydown="if(event.key===\'Enter\')runCmd()"></div>';document.getElementById('cmd').focus();return}else if(cmd==='date')out=new Date().toString();else if(cmd==='uname')out='salp Linux Mobile PC v0.3.0 / Android';else if(cmd.startsWith('echo '))out=cmd.slice(5);else if(cmd==='about')out='Prototype shell. Real Linux commands planned via Termux/PRoot.';else out=cmd?'command not found: '+cmd:'';let row=input.parentElement;row.insertAdjacentHTML('beforebegin','<div>salp@android:~$ '+escapeHtml(cmd)+'</div>'+(out?'<div>'+escapeHtml(out)+'</div>':''));input.value='';term.scrollTop=term.scrollHeight}
 function escapeHtml(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-document.querySelectorAll('.window').forEach(w=>w.addEventListener('pointerdown',()=>w.style.zIndex=++z));
 </script>
 </body></html>
